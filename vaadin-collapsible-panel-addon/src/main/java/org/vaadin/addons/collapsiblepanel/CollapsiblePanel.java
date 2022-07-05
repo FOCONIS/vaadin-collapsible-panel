@@ -1,15 +1,15 @@
 package org.vaadin.addons.collapsiblepanel;
 
-import java.lang.reflect.Method;
-
-import org.vaadin.addons.collapsiblepanel.client.CollapsiblePanelServerRpc;
-import org.vaadin.addons.collapsiblepanel.client.CollapsiblePanelState;
-
+import com.vaadin.event.SerializableEventListener;
 import com.vaadin.server.AbstractExtension;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Component.Event;
 import com.vaadin.ui.Panel;
 import com.vaadin.util.ReflectTools;
+import org.vaadin.addons.collapsiblepanel.client.CollapsiblePanelServerRpc;
+import org.vaadin.addons.collapsiblepanel.client.CollapsiblePanelState;
+
+import java.lang.reflect.Method;
 
 /**
  * The CollapsiblePanel extends the usual {@link Panel} by the ability to
@@ -17,20 +17,23 @@ import com.vaadin.util.ReflectTools;
  * <p>
  * <p>
  * Additionally everything is observable with listeners.
- * 
+ *
  * @author cthiel
- * 
  */
 @SuppressWarnings("serial")
 public class CollapsiblePanel extends AbstractExtension {
 
-	public static interface CollapseExpandListener {
-		public static final Method PANEL_EXPAND_METHOD = ReflectTools.findMethod(	CollapseExpandListener.class, "expand",
-																					ExpandEvent.class);
-		public static final Method PANEL_COLLAPSE_METHOD = ReflectTools.findMethod(	CollapseExpandListener.class,
-																					"collapse", CollapseEvent.class);
+	@FunctionalInterface
+	public static interface ExpandListener extends SerializableEventListener {
+		public static final Method PANEL_EXPAND_METHOD = ReflectTools.findMethod(ExpandListener.class, "expand", ExpandEvent.class);
 
 		public void expand(ExpandEvent event);
+
+	}
+
+	@FunctionalInterface
+	public static interface CollapseListener extends SerializableEventListener {
+		public static final Method PANEL_COLLAPSE_METHOD = ReflectTools.findMethod(CollapseListener.class, "collapse", CollapseEvent.class);
 
 		public void collapse(CollapseEvent event);
 	}
@@ -88,9 +91,12 @@ public class CollapsiblePanel extends AbstractExtension {
 		fireEvent(new CollapseEvent(this.targetPanel));
 	}
 
-	public void addCollapseExpandListener(CollapseExpandListener listener) {
-		addListener(ExpandEvent.class, listener, CollapseExpandListener.PANEL_EXPAND_METHOD);
-		addListener(CollapseEvent.class, listener, CollapseExpandListener.PANEL_COLLAPSE_METHOD);
+	public void addExpandListener(ExpandListener listener) {
+		addListener(ExpandEvent.class, listener, ExpandListener.PANEL_EXPAND_METHOD);
+	}
+
+	public void addCollapseListener(CollapseListener listener) {
+		addListener(CollapseEvent.class, listener, CollapseListener.PANEL_COLLAPSE_METHOD);
 	}
 
 	public void setCollapsed(boolean collapsed) {

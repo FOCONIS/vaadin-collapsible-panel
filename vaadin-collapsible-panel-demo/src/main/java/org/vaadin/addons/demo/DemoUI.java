@@ -34,6 +34,9 @@ public class DemoUI extends UI {
 		panel.setWidth(50, Unit.PERCENTAGE);
 		final CollapsiblePanel collapsiblePanelExtension = new CollapsiblePanel(panel);
 
+		collapsiblePanelExtension.addExpandListener(evt -> System.out.println("Expand"));
+		collapsiblePanelExtension.addCollapseListener(evt -> System.out.println("Collapse"));
+
 		// Show it in the middle of the screen
 		final VerticalLayout layout = new VerticalLayout();
 		layout.setStyleName("demoContentLayout");
