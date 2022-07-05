@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.avaje</groupId>
 		<artifactId>java11-oss</artifactId>
-		<version>3.8</version> <!-- dependency-update:ignore -->
+		<version>3.9</version> <!-- dependency-update:ignore -->
 	</parent>
 	<groupId>org.vaadin.addons</groupId>
 	<artifactId>vaadin-collapsible-panel-root</artifactId>
