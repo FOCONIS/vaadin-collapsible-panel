@@ -19,7 +19,7 @@
 		<vaadin.plugin.version>8.15.2</vaadin.plugin.version>
 		<junit.version>4.13.2</junit.version>
 		<javax-servlet-api.version>4.0.1</javax-servlet-api.version>
-		<jetty.plugin.version>10.0.1</jetty.plugin.version>
+		<jetty.plugin.version>11.0.11</jetty.plugin.version>
 
 		<maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
 		<maven-war-plugin.version>3.3.2</maven-war-plugin.version>
