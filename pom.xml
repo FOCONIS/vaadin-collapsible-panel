@@ -15,7 +15,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<vaadin.version>8.16.0</vaadin.version>
+		<vaadin.version>8.16.1</vaadin.version>
 		<vaadin.plugin.version>8.16.0</vaadin.plugin.version>
 		<junit.version>4.13.2</junit.version>
 		<javax-servlet-api.version>4.0.1</javax-servlet-api.version>
